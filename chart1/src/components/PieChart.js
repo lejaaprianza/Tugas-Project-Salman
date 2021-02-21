@@ -5,7 +5,7 @@ import React,{useState,useEffect} from 'react'
 
 const PieChart = () => {
 
-    const [dataBuah,setDataBuah] = useState([])
+    const [dataItem,setDataItem] = useState([])
     // const [input, setInput] = useState({name:"", currentId:null})
     
     useEffect(()=>{
@@ -17,7 +17,7 @@ const PieChart = () => {
             let obj = {id:x.id,item_code:x.item_code,item_name:x.item_name,price:x.price,stock:x.stock}
             return obj
         })
-        setDataBuah(getBuah)
+        setDataItem(getBuah)
         })
           }, 1000);
           return () => clearInterval(interval);
@@ -29,10 +29,10 @@ const PieChart = () => {
         //     let obj = {id:x.id,item_code:x.item_code,item_name:x.item_name,price:x.price,stock:x.stock}
         //     return obj
         // })
-        // setDataBuah(getBuah)
+        // setDataItem(getBuah)
         // })
     },[])
-// console.log(dataBuah.map((x,y)=>{
+// console.log(dataItem.map((x,y)=>{
 //     return(x.item_name)
 // }))
   return (
@@ -40,11 +40,11 @@ const PieChart = () => {
       <Pie
       height={100}
       data={{
-        labels:dataBuah.map((x,y)=>{
+        labels:dataItem.map((x,y)=>{
             return(x.item_name)
         }),
         datasets: [{
-            data: dataBuah.map((x,y)=>{
+            data: dataItem.map((x,y)=>{
                 return(x.stock)
             }),
             backgroundColor: [
