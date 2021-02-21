@@ -1,0 +1,72 @@
+import { Doughnut } from 'react-chartjs-2'
+import axios from "axios"
+import React,{useState,useEffect} from 'react'
+
+
+const Doughnuts = () => {
+
+    const [dataBuah,setDataBuah] = useState([])
+    // const [input, setInput] = useState({name:"", currentId:null})
+    
+    useEffect(()=>{
+        const interval = setInterval(() => {
+            axios.get(`http://localhost/my_store/getdata.php`)
+        .then(res=>{
+            //Pengolahan data
+        let getBuah = res.data.map(x=>{
+            let obj = {id:x.id,item_code:x.item_code,item_name:x.item_name,price:x.price,stock:x.stock}
+            return obj
+        })
+        setDataBuah(getBuah)
+        })
+          }, 1000);
+          return () => clearInterval(interval);
+
+        // axios.get(`http://localhost/my_store/getdata.php`)
+        // .then(res=>{
+        //     //Pengolahan data
+        // let getBuah = res.data.map(x=>{
+        //     let obj = {id:x.id,item_code:x.item_code,item_name:x.item_name,price:x.price,stock:x.stock}
+        //     return obj
+        // })
+        // setDataBuah(getBuah)
+        // })
+    },[])
+// console.log(dataBuah.map((x,y)=>{
+//     return(x.item_name)
+// }))
+  return (
+    <div className="chart">
+      <Doughnut
+      height={100}
+      data={{
+        labels: dataBuah.map((x,y)=>{
+            return(x.item_name)
+        }),
+        datasets: [{
+            data: dataBuah.map((x,y)=>{
+                return(x.price)
+            }),
+            backgroundColor: [
+            '#FF6384',
+            '#36A2EB',
+            '#FFCE56',
+            '#8F1E51',
+            '#01CE59',
+            ],
+            hoverBackgroundColor: [
+            '#FF6384',
+            '#36A2EB',
+            '#FFCE56',
+            '#8F1E51',
+            '#01CE59',
+            ]
+        }]
+    }}
+      
+      />
+    </div>
+  )
+}
+
+export default Doughnuts

@@ -1,0 +1,15 @@
+.layout {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  .blog-item {
+    // height: 300px;
+    width: calc(50% - 10px);
+    // width: 49.2%;
+    // width: 200px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: 5px 6px 14px rgba(0, 0, 0, 0.2);
+  }
+}
